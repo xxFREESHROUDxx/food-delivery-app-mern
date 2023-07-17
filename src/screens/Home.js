@@ -13,7 +13,7 @@ export default function Home() {
       <div>
         <Carousel />
       </div>
-      <div className='m-3'>
+      <div className='m-3' style={{ display: 'flex', gap: '2rem' }}>
         <Card />
         <Card />
         <Card />
