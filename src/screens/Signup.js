@@ -13,7 +13,7 @@ const Signup = () => {
     e.preventDefault();
     const response = await fetch('http://localhost:5000/api/createuser', {
       method: 'POST',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -24,7 +24,6 @@ const Signup = () => {
       }),
     });
     const json = await response.json();
-    console.log(json);
 
     if (!json.success) {
       alert('Enter a Valid Credentials!');
@@ -32,7 +31,7 @@ const Signup = () => {
   };
 
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: [e.target.value] });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   return (
@@ -94,10 +93,10 @@ const Signup = () => {
           />
         </div>
 
-        <button type='submit' className='m-3 btn btn-primary'>
+        <button type='submit' className='m-3 btn btn-success'>
           Submit
         </button>
-        <Link to='/login' className='m-3 btn btn-danger'>
+        <Link to='/login' className='m-3 btn btn-warning'>
           Already a User?
         </Link>
       </form>
