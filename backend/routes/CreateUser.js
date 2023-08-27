@@ -1,7 +1,9 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const User = require('../models/User');
-const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // Create User POST METHOD
 router.post(
@@ -17,10 +19,13 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    const salt = await bcrypt.genSalt(11);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     try {
       await User.create({
         name: req.body.name,
-        password: req.body.password,
+        password: hashedPassword,
         email: req.body.email,
         location: req.body.location,
       });
@@ -54,10 +59,21 @@ router.post(
         return res.status(400).json({ errors: 'Try logging with correct credentials' });
       }
 
-      if (!(req.body.password === userData.password)) {
+      const passwordCompare = await bcrypt.compare(req.body.password, userData.password);
+      if (!passwordCompare) {
         return res.status(400).json({ errors: 'Try logging with correct credentials' });
       }
-      return res.json({ success: true });
+
+      const data = {
+        user: {
+          id: userData.id,
+        },
+      };
+
+      const jwtSecret = 'HelloWorldMyNameis-Baibhav-KC_324$@!%';
+
+      const authToken = jwt.sign(data, jwtSecret);
+      return res.json({ success: true, authToken: authToken });
     } catch (error) {
       console.log(error);
       res.json({ success: false });
