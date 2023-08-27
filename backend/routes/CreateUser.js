@@ -3,11 +3,14 @@ const router = express.Router();
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 
+// Create User POST METHOD
 router.post(
   '/createuser',
-  body('email', 'Please enter a valid email').isEmail(),
-  body('password', 'Password must be greater than 8 characters').isLength({ min: 8 }),
-  body('name', 'Name must be greater than 5 characters').isLength({ min: 5 }),
+  [
+    body('email', 'Please enter a valid email').isEmail(),
+    body('password', 'Password must be greater than 8 characters').isLength({ min: 8 }),
+    body('name', 'Name must be greater than 5 characters').isLength({ min: 5 }),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -22,6 +25,39 @@ router.post(
         location: req.body.location,
       });
       res.json({ success: true });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false });
+    }
+  }
+);
+
+// Login User POST METHOD
+router.post(
+  '/loginuser',
+  [
+    body('email', 'Please enter a valid email').isEmail(),
+    body('password', 'Password must be greater than 8 characters').isLength({ min: 8 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let email = req.body.email;
+
+    try {
+      let userData = await User.findOne({ email });
+
+      if (!userData) {
+        return res.status(400).json({ errors: 'Try logging with correct credentials' });
+      }
+
+      if (!(req.body.password === userData.password)) {
+        return res.status(400).json({ errors: 'Try logging with correct credentials' });
+      }
+      return res.json({ success: true });
     } catch (error) {
       console.log(error);
       res.json({ success: false });
