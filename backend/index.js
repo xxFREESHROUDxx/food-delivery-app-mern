@@ -20,7 +20,8 @@ app.get('/', function (req, res) {
 });
 
 app.use(express.json());
-app.use('/api', routes);
+app.use('/api', require('./routes/CreateUser'));
+app.use('/api', require('./routes/DisplayData'));
 
 app.listen(port, () => {
   console.log(`App listening to port ${port}`.yellow);
