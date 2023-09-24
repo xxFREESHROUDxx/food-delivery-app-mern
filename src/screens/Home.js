@@ -102,7 +102,9 @@ export default function Home() {
         {foodCategory.length > 0
           ? foodCategory.map((data) => (
               <div className='row mb-3'>
-                <div key={data._id}>{data.CategoryName}</div>
+                <div key={data._id}>
+                  <h2>{data.CategoryName}</h2>
+                </div>
                 <hr />
                 {foodItem.length > 0 ? (
                   foodItem
@@ -114,7 +116,7 @@ export default function Home() {
                     .map((filteredItems) => {
                       return (
                         <div className='col-12 col-md-6 col-lg-3' key={filteredItems._id}>
-                          <Card foodDetails={filteredItems} />
+                          <Card foodDetails={filteredItems} options={filteredItems.options[0]} />
                         </div>
                       );
                     })

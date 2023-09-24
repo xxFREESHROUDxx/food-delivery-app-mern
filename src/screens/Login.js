@@ -28,6 +28,7 @@ export const Login = () => {
       alert('Enter a Valid Credentials!');
     }
     if (json.success) {
+      localStorage.setItem('authToken', json.authToken);
       navigate('/');
     }
   };
@@ -71,7 +72,7 @@ export const Login = () => {
           <button type='submit' className='m-3 btn bg-success'>
             Submit
           </button>
-          <Link to='/signup' className='m-3 btn btn-warning'>
+          <Link to='/createuser' className='m-3 btn btn-warning'>
             I'm a new User
           </Link>
         </form>
