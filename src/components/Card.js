@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useCart, useDispatchCart } from './ContextReducer';
+import { toast } from 'react-toastify';
 
 export default function Card(props) {
   const { _id, name, img, description } = props.foodDetails;
@@ -18,7 +19,6 @@ export default function Card(props) {
     for (const item of data) {
       if (item.id === _id) {
         food = item;
-
         break;
       }
     }
@@ -49,6 +49,11 @@ export default function Card(props) {
       qty: quantity,
       size: size,
       img: img,
+    });
+
+    toast.success('Item Added to Cart', {
+      position: 'bottom-right', // You can adjust the position
+      autoClose: 3000,
     });
   };
 

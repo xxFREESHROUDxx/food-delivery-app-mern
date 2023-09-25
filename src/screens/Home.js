@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import Card from '../components/Card';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -28,6 +30,7 @@ export default function Home() {
 
   return (
     <div>
+      <ToastContainer />
       <div>
         <Navbar />
       </div>
