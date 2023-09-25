@@ -1,8 +1,18 @@
-# Getting Started with Create React App
+#MERN Project
+This is my personal project which I did for learning more on MERN stack. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This MERN project is an ecommerce website that I created for ordering food items. 
 
-## Available Scripts
+###For backend setup:
+- Go to backend folder and run `npm install`.
+- After that you can just run `npm start` command to run the backend.
+  Please note that you need to connect your backend MongoDB database first which can be found in MongoURI inside db.js file.
+
+###For frontend setup:
+- In the main directory just run `npm install` command
+- After that run `npm start`
+
+### Once you start backend and frontend, this project will run.
 
 In the project directory, you can run:
 
