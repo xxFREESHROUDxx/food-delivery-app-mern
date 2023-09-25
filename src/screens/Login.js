@@ -22,12 +22,12 @@ export const Login = () => {
       }),
     });
     const json = await response.json();
-    console.log(json);
 
     if (!json.success) {
       alert('Enter a Valid Credentials!');
     }
     if (json.success) {
+      localStorage.setItem('userEmail', credentials.email);
       localStorage.setItem('authToken', json.authToken);
       navigate('/');
     }
