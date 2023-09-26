@@ -40,4 +40,43 @@ router.post('/orderData', async (req, res) => {
   }
 });
 
+// Route for showing client's ordered data
+router.post('/myOrderData', async (req, res) => {
+  try {
+    //get the data for the user's email
+    let userData = await Order.findOne({ email: req.body.email });
+    if (!userData) {
+      // If no data is found for the user, you can return an empty array or an appropriate message.
+      return res.json({ orderData: [] });
+    }
+
+    // const orderData = [];
+
+    const sortedOrders = userData.order_data
+      .map((order, index) => ({
+        order_date: userData.order_date[index],
+        items: order.map((foodItem) => ({
+          ...foodItem,
+        })),
+      }))
+      .sort((a, b) => new Date(b.order_date) - new Date(a.order_date));
+
+    // for (let i = 0; i < userData.order_data.length; i++) {
+    //   const orderDate = userData.order_date[i];
+
+    //   for (const foodItem of userData.order_data[i]) {
+    //     const mergedData = {
+    //       order_date: orderDate,
+    //       ...foodItem,
+    //     };
+    //     orderData.push(mergedData);
+    //   }
+    // }
+
+    res.json({ orderData: sortedOrders });
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
