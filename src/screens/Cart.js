@@ -28,14 +28,11 @@ const Cart = () => {
       }),
     });
 
-    console.log('Order Response: ', response);
     if (response.status === 200) {
       dispatch({ type: 'DROP' });
       alert('Your Order has been confirmed. Please pay once the order arrives at your doorstep!');
     }
   };
-
-  console.log('Food Data:', data);
 
   return (
     <div>
@@ -58,7 +55,7 @@ const Cart = () => {
                   <img
                     src={food.img}
                     alt={food.name}
-                    style={{ height: '64px', objectFit: 'fill' }}
+                    style={{ height: '64px', objectFit: 'fill', width: '100px' }}
                   />
                 </th>
                 <td>{food.name}</td>
@@ -72,7 +69,7 @@ const Cart = () => {
                     alt='delete'
                     onClick={() => dispatch({ type: 'REMOVE', index: index })}
                   >
-                    <BsFillTrash3Fill />
+                    <BsFillTrash3Fill color='red' size={32} />
                   </button>
                 </td>
               </tr>
