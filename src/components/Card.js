@@ -66,7 +66,7 @@ export default function Card(props) {
   return (
     <>
       <div
-        className='card mt-3 rounded-4'
+        className='card h-100 d-flex flex-column mt-2 mb-5'
         style={{ width: '19rem', maxHeight: '520px', borderRadius: '10px' }}
       >
         <img
