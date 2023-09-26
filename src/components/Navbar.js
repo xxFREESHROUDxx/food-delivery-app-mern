@@ -21,7 +21,7 @@ export const Navbar = () => {
       <nav className='navbar navbar-expand-lg navbar-dark bg-success'>
         <div className='container-fluid'>
           <Link className='navbar-brand fs-1 fst-italic ' to='/'>
-            Go Food
+            Food Nepal
           </Link>
           <button
             className='navbar-toggler'
