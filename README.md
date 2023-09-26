@@ -1,4 +1,4 @@
-# MERN Project
+# MERN Project: FoodNepal
 This is my personal project which I did for learning more on MERN stack. 
 
 This MERN project is an ecommerce website that I created for ordering food items. 
