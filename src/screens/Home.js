@@ -104,8 +104,8 @@ export default function Home() {
       <div className='container'>
         {foodCategory.length > 0
           ? foodCategory.map((data) => (
-              <div className='row mb-3'>
-                <div key={data._id}>
+              <div className='row'>
+                <div key={data._id} className='mt-5'>
                   <h2>{data.CategoryName}</h2>
                 </div>
                 <hr />
